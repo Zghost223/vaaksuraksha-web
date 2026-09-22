@@ -33,16 +33,19 @@ const SAMPLE_ACCURACY: AccuracyMetrics = {
   lastUpdated: '2026-09-20T10:00:00Z',
 };
 
-function getPool(): Pool {
+function getPool(): Pool | null {
   const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
   if (!connectionString) {
-    throw new Error('POSTGRES_URL or DATABASE_URL not set');
+    return null;
   }
   return new Pool({ connectionString, max: 5, idleTimeoutMillis: 30000, connectionTimeoutMillis: 5000 });
 }
 
 export async function getAccuracyMetrics(): Promise<AccuracyMetrics> {
   const pool = getPool();
+  if (!pool) {
+    return SAMPLE_ACCURACY;
+  }
   try {
     const result = await pool.query(
       'SELECT data FROM accuracy_metrics ORDER BY updated_at DESC LIMIT 1'
@@ -60,6 +63,9 @@ export async function getAccuracyMetrics(): Promise<AccuracyMetrics> {
 
 export async function saveAccuracyMetrics(metrics: AccuracyMetrics): Promise<void> {
   const pool = getPool();
+  if (!pool) {
+    return;
+  }
   try {
     await pool.query(
       `INSERT INTO accuracy_metrics (data, updated_at)
@@ -78,6 +84,9 @@ export async function saveAccuracyMetrics(metrics: AccuracyMetrics): Promise<voi
 
 export async function getHealthCheck(): Promise<{ status: string; timestamp: string }> {
   const pool = getPool();
+  if (!pool) {
+    return { status: 'degraded', timestamp: new Date().toISOString() };
+  }
   try {
     await pool.query('SELECT 1');
     return { status: 'healthy', timestamp: new Date().toISOString() };
