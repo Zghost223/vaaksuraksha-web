@@ -1,20 +1,16 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  functions = "netlify/functions/**/*.js"
 
-[build.environment]
-  NODE_VERSION = "20"
-  NEXT_TELEMETRY_DISABLED = "1"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/health"
   to = "/api/health"
-  status = 200
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
   status = 200
 
 [[headers]]
