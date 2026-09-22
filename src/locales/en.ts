@@ -1,0 +1,105 @@
+export const en = {
+  nav: {
+    home: 'Home',
+    dashboard: 'Dashboard',
+    accuracy: 'Model Accuracy',
+    about: 'About',
+  },
+  hero: {
+    title: 'VaakSuraksha',
+    subtitle: 'AI-Powered Real-Time Detection & Prevention of Voice Cloning Impersonation Attacks',
+    tagline: 'Vaak = Speech · Suraksha = Protection',
+    cta: 'View Live Dashboard',
+    ctaSecondary: 'See Model Accuracy',
+  },
+  features: {
+    title: 'How It Works',
+    detect: {
+      title: 'Detect',
+      desc: '4-layer analysis: spectral artifacts, prosody patterns, speaker drift, and active challenge-response',
+    },
+    decide: {
+      title: 'Decide',
+      desc: 'Fused risk score with EMA smoothing, contextual enrichment, and per-scenario configurable thresholds',
+    },
+    prevent: {
+      title: 'Prevent',
+      desc: 'Pre-transaction warnings, step-up verification (call-back + MFA), automated workflow holds',
+    },
+    protect: {
+      title: 'Protect',
+      desc: 'Edge inference, RAM-only audio buffers, feature-only logs, tamper-evident hash-chained audit ledger',
+    },
+  },
+  accuracy: {
+    title: 'Model Accuracy Metrics',
+    subtitle: 'Measured on ASVspoof, WaveFake, In-the-Wild, and Indian-language cloned datasets with codec augmentation',
+    overall: 'Overall Metrics',
+    perLanguage: 'Per-Language Accuracy',
+    perCodec: 'Per-Codec Robustness',
+    unseenGenerator: 'Unseen Generator Generalization',
+    metrics: {
+      eer: 'Equal Error Rate (EER)',
+      auc: 'AUC',
+      f1: 'F1 Score',
+      fpr: 'False Positive Rate @ 95% Recall',
+    },
+    languages: {
+      hindi: 'Hindi',
+      english: 'English',
+      marathi: 'Marathi',
+      gujarati: 'Gujarati',
+      tamil: 'Tamil',
+      bengali: 'Bengali',
+      telugu: 'Telugu',
+    },
+    codecs: {
+      g711: 'G.711 μ-law/A-law (8 kHz)',
+      amr: 'AMR-NB',
+      gsm: 'GSM',
+      opus: 'Opus (Low Bitrate)',
+      clean: 'Clean (16 kHz)',
+    },
+  },
+  dashboard: {
+    title: 'Live Risk Monitor',
+    status: {
+      green: 'GREEN - Normal',
+      amber: 'AMBER - Suspicious',
+      red: 'RED - High Risk',
+    },
+    labels: {
+      riskScore: 'Risk Score',
+      layer1: 'Spectral / SSL (L1)',
+      layer2: 'Prosody & Behaviour (L2)',
+      layer3: 'Speaker Drift (L3)',
+      layer4: 'Active Challenge (L4)',
+      context: 'Context Risk',
+      fusedScore: 'Fused Score',
+      smoothedScore: 'Smoothed Score (EMA)',
+    },
+    actions: {
+      startSession: 'Start Call Session',
+      stopSession: 'Stop Session',
+      triggerChallenge: 'Trigger Challenge',
+      viewReport: 'View Report',
+    },
+  },
+  about: {
+    title: 'About VaakSuraksha',
+    description: 'VaakSuraksha is an end-to-end voice-integrity layer built for Smart India Hackathon 2026 (Problem Statement 26104). It listens to live calls in short windows, scores how likely the caller is a cloned or AI-generated voice, and converts that score into an action before money or data moves.',
+    stack: 'Technology Stack',
+    team: 'Team',
+    problemStatement: 'Problem Statement 26104',
+    organization: 'AICTE Cyber Security Cell · Software · Blockchain & Cybersecurity',
+  },
+  footer: {
+    copyright: '© 2026 VaakSuraksha · Smart India Hackathon PS 26104',
+    privacy: 'Privacy by Design',
+    opensource: 'Open APIs',
+  },
+  language: {
+    label: 'Language',
+    select: 'Select Language',
+  },
+}

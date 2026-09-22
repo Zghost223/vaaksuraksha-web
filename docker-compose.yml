@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vaaksuraksha-db
+    environment:
+      POSTGRES_DB: vaaksuraksha
+      POSTGRES_USER: vaaksuraksha
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vaaksuraksha_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vaaksuraksha -d vaaksuraksha"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vaaksuraksha-web
+    ports:
+      - "3000:3000"
+    environment:
+      - POSTGRES_URL=postgresql://vaaksuraksha:vaaksuraksha_dev@postgres:5432/vaaksuraksha
+      - NODE_ENV=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./package.json:/app/package.json
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./next.config.js:/app/next.config.js
+      - ./tailwind.config.ts:/app/tailwind.config.ts
+      - ./postcss.config.js:/app/postcss.config.js
+
+volumes:
+  postgres_data:
